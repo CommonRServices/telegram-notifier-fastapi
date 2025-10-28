@@ -28,7 +28,7 @@ async def health_checking():
 @app.post("/", status_code=status.HTTP_201_CREATED)
 async def send_notification(data: NotificationReq):
     logger.info("Received notification call.")
-    if NotificationType.NOTIFICATION:
+    if data.type == NotificationType.NOTIFICATION:
         await send_message(
             telegram_bot, CHAT_ID, format_notification_message(data.message)
         )
